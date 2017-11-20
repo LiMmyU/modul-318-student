@@ -43,5 +43,8 @@ namespace SwissTransport
     {
         [JsonProperty("stations")]
         public List<Station> StationList { get; set; }
+
     }
+
+  
 }
