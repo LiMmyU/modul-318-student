@@ -45,14 +45,14 @@
             // 
             // btnSearch
             // 
+            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.7F);
-            this.btnSearch.Location = new System.Drawing.Point(352, 35);
+            this.btnSearch.Location = new System.Drawing.Point(352, 40);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(95, 80);
-            this.btnSearch.TabIndex = 4;
+            this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "Suchen";
             this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.UseWaitCursor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtDestination
@@ -60,7 +60,7 @@
             this.txtDestination.Location = new System.Drawing.Point(103, 65);
             this.txtDestination.Name = "txtDestination";
             this.txtDestination.Size = new System.Drawing.Size(243, 22);
-            this.txtDestination.TabIndex = 2;
+            this.txtDestination.TabIndex = 3;
             this.txtDestination.TextChanged += new System.EventHandler(this.txtDestination_TextChanged);
             this.txtDestination.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDestination_KeyDown);
             // 
@@ -78,7 +78,7 @@
             this.dtpickerDate.Location = new System.Drawing.Point(103, 93);
             this.dtpickerDate.Name = "dtpickerDate";
             this.dtpickerDate.Size = new System.Drawing.Size(243, 22);
-            this.dtpickerDate.TabIndex = 3;
+            this.dtpickerDate.TabIndex = 5;
             this.dtpickerDate.Value = new System.DateTime(2017, 11, 20, 0, 0, 0, 0);
             // 
             // lblDeparture
@@ -112,9 +112,11 @@
             // 
             // grpSearch
             // 
+            this.grpSearch.Controls.Add(this.lboxDestination);
             this.grpSearch.Controls.Add(this.txtDeparture);
             this.grpSearch.Controls.Add(this.btnSearch);
             this.grpSearch.Controls.Add(this.lblZielort);
+            this.grpSearch.Controls.Add(this.lboxDeparture);
             this.grpSearch.Controls.Add(this.txtDestination);
             this.grpSearch.Controls.Add(this.lblDeparture);
             this.grpSearch.Controls.Add(this.dtpickerDate);
@@ -129,33 +131,36 @@
             // 
             this.dgviewAbfahrtsplan.AllowUserToAddRows = false;
             this.dgviewAbfahrtsplan.AllowUserToDeleteRows = false;
+            this.dgviewAbfahrtsplan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgviewAbfahrtsplan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgviewAbfahrtsplan.Location = new System.Drawing.Point(68, 246);
+            this.dgviewAbfahrtsplan.Location = new System.Drawing.Point(68, 245);
             this.dgviewAbfahrtsplan.Name = "dgviewAbfahrtsplan";
             this.dgviewAbfahrtsplan.ReadOnly = true;
+            this.dgviewAbfahrtsplan.RowHeadersVisible = false;
             this.dgviewAbfahrtsplan.RowTemplate.Height = 24;
-            this.dgviewAbfahrtsplan.Size = new System.Drawing.Size(745, 215);
+            this.dgviewAbfahrtsplan.Size = new System.Drawing.Size(541, 150);
             this.dgviewAbfahrtsplan.TabIndex = 10;
             // 
             // lboxDeparture
             // 
             this.lboxDeparture.FormattingEnabled = true;
             this.lboxDeparture.ItemHeight = 16;
-            this.lboxDeparture.Location = new System.Drawing.Point(653, 27);
+            this.lboxDeparture.Location = new System.Drawing.Point(103, 55);
             this.lboxDeparture.Name = "lboxDeparture";
             this.lboxDeparture.Size = new System.Drawing.Size(243, 52);
-            this.lboxDeparture.TabIndex = 11;
+            this.lboxDeparture.TabIndex = 2;
             this.lboxDeparture.Visible = false;
+            this.lboxDeparture.DoubleClick += new System.EventHandler(this.lboxDeparture_DoubleClick);
             this.lboxDeparture.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lboxDeparture_KeyDown);
             // 
             // lboxDestination
             // 
             this.lboxDestination.FormattingEnabled = true;
             this.lboxDestination.ItemHeight = 16;
-            this.lboxDestination.Location = new System.Drawing.Point(653, 57);
+            this.lboxDestination.Location = new System.Drawing.Point(103, 85);
             this.lboxDestination.Name = "lboxDestination";
             this.lboxDestination.Size = new System.Drawing.Size(243, 52);
-            this.lboxDestination.TabIndex = 12;
+            this.lboxDestination.TabIndex = 4;
             this.lboxDestination.Visible = false;
             this.lboxDestination.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lboxDestination_KeyDown);
             // 
@@ -163,12 +168,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(924, 504);
-            this.Controls.Add(this.lboxDestination);
+            this.ClientSize = new System.Drawing.Size(739, 504);
             this.Controls.Add(this.dgviewAbfahrtsplan);
             this.Controls.Add(this.grpSearch);
             this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.lboxDeparture);
             this.MinimumSize = new System.Drawing.Size(546, 551);
             this.Name = "mainForm";
             this.Text = "mainForm";

@@ -38,8 +38,8 @@ namespace TransportNow
             //Verbindungen in DataTAble speichern
             foreach (Connection station in stb.ConnectionList)
             {
-                dtConnections.Rows.Add(station.From.Departure, station.From.Station.Name, station.To.Station.Name,
-                    station.To.Arrival);
+                dtConnections.Rows.Add(ConvertDateToTime(station.From.Departure), station.From.Station.Name, station.To.Station.Name,
+                   ConvertDateToTime(station.To.Arrival));
             }
 
             //DatatAble in DataGrdid hinzufühen
@@ -109,7 +109,7 @@ namespace TransportNow
         /// </summary>
         private void selectLocation(ListBox lbox, TextBox txt, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
+            if (e.KeyCode == Keys.Enter)
             {
                 txt.Text = lbox.SelectedItem.ToString();
                 txt.Focus();
@@ -117,6 +117,37 @@ namespace TransportNow
             }
 
 
+        }
+
+        /// <summary>
+        /// Wandelt zeit in ein hh:mm format um
+        /// </summary>
+        private string ConvertDateToTime(string dateTime_str)
+        {
+            //Time zum zurück geben
+            string time = string.Empty;
+
+            //DateTime parsen
+            DateTime dateTime;
+            DateTime.TryParse(dateTime_str, out dateTime);
+
+            //Nur Zeit zum string
+            time = dateTime.ToString("HH:mm");
+
+            //Zeit zurück geben
+            return time;
+        }
+
+        private void mouseDoubleClick(ListBox lbox, TextBox txt, EventArgs e)
+        {
+            txt.Text = lbox.SelectedItem.ToString();
+            txt.Focus();
+            lbox.Visible = false;
+        }
+
+        private void lboxDeparture_DoubleClick(object sender, EventArgs e)
+        {
+            mouseDoubleClick(lboxDeparture, txtDeparture, e);
         }
     }
 }
