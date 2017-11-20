@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SwissTransport;
 
 
 namespace TransportNow
@@ -20,8 +21,14 @@ namespace TransportNow
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            Transport t = new Transport();
+            dgviewAbfahrtsplan.DataSource = t.GetConnections(txtDeparture.Text, txtDestination.Text).ConnectionList;
 
         }
 
+        private void mainForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -96,7 +96,7 @@
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(24, 24);
+            this.lblTitle.Location = new System.Drawing.Point(297, 39);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(231, 39);
             this.lblTitle.TabIndex = 7;
@@ -110,7 +110,7 @@
             this.grpSearch.Controls.Add(this.txtDestination);
             this.grpSearch.Controls.Add(this.lblDeparture);
             this.grpSearch.Controls.Add(this.dtpickerDate);
-            this.grpSearch.Location = new System.Drawing.Point(31, 88);
+            this.grpSearch.Location = new System.Drawing.Point(201, 102);
             this.grpSearch.Name = "grpSearch";
             this.grpSearch.Size = new System.Drawing.Size(466, 138);
             this.grpSearch.TabIndex = 8;
@@ -119,24 +119,28 @@
             // 
             // dgviewAbfahrtsplan
             // 
+            this.dgviewAbfahrtsplan.AllowUserToAddRows = false;
+            this.dgviewAbfahrtsplan.AllowUserToDeleteRows = false;
             this.dgviewAbfahrtsplan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgviewAbfahrtsplan.Location = new System.Drawing.Point(31, 248);
+            this.dgviewAbfahrtsplan.Location = new System.Drawing.Point(68, 246);
             this.dgviewAbfahrtsplan.Name = "dgviewAbfahrtsplan";
+            this.dgviewAbfahrtsplan.ReadOnly = true;
             this.dgviewAbfahrtsplan.RowTemplate.Height = 24;
-            this.dgviewAbfahrtsplan.Size = new System.Drawing.Size(466, 226);
+            this.dgviewAbfahrtsplan.Size = new System.Drawing.Size(745, 215);
             this.dgviewAbfahrtsplan.TabIndex = 10;
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 504);
+            this.ClientSize = new System.Drawing.Size(924, 504);
             this.Controls.Add(this.dgviewAbfahrtsplan);
             this.Controls.Add(this.grpSearch);
             this.Controls.Add(this.lblTitle);
             this.MinimumSize = new System.Drawing.Size(546, 551);
             this.Name = "mainForm";
             this.Text = "mainForm";
+            this.Load += new System.EventHandler(this.mainForm_Load);
             this.grpSearch.ResumeLayout(false);
             this.grpSearch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgviewAbfahrtsplan)).EndInit();
