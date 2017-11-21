@@ -27,7 +27,8 @@ namespace TransportNow
         {
             createDeparturePlan();
             createStationBoard(txtDeparture);
-            lboxDestination.Visible = false;
+            hideListBox(lboxDeparture);
+            hideListBox(lboxDestination);
         }
 
         private void mainForm_Load(object sender, EventArgs e)
@@ -82,6 +83,27 @@ namespace TransportNow
         private void txtDestination_Enter(object sender, EventArgs e)
         {
             lboxDeparture.Visible = false;
+        }
+
+        private void btnSearch_Enter(object sender, EventArgs e)
+        {
+            hideListBox(lboxDestination);
+        }
+
+        private void txtDeparture_Leave(object sender, EventArgs e)
+        {
+            if (txtDeparture.Text == "")
+            {
+                hideListBox(lboxDeparture);
+            }
+        }
+
+        private void txtDestination_Leave(object sender, EventArgs e)
+        {
+            if (txtDestination.Text == "")
+            {
+                hideListBox(lboxDestination);
+            }
         }
 
         /// <summary>
@@ -197,8 +219,17 @@ namespace TransportNow
             dtDepartureBoard.Columns.Add("Zielort");
 
             //StationBoard holen
+            try
+            {
+                stationNameDeparture = stDeparture.StationList[0].Name;
 
-            stationNameDeparture = stDeparture.StationList[0].Name;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Diese Ortschaft gibt es Nicht/hat kein ÖV Anschluss");
+                return;
+            }
+
             stationId = stDeparture.StationList[0].Id;
             StationBoardRoot stbRoot = t.GetStationBoard(txt.Text, stationId);
 

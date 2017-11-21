@@ -58,6 +58,7 @@
             this.btnSearch.Text = "Suchen";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnSearch.Enter += new System.EventHandler(this.btnSearch_Enter);
             // 
             // txtDestination
             // 
@@ -68,6 +69,7 @@
             this.txtDestination.TextChanged += new System.EventHandler(this.txtDestination_TextChanged);
             this.txtDestination.Enter += new System.EventHandler(this.txtDestination_Enter);
             this.txtDestination.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDestination_KeyDown);
+            this.txtDestination.Leave += new System.EventHandler(this.txtDestination_Leave);
             // 
             // txtDeparture
             // 
@@ -77,6 +79,7 @@
             this.txtDeparture.TabIndex = 1;
             this.txtDeparture.TextChanged += new System.EventHandler(this.txtDeparture_TextChanged);
             this.txtDeparture.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDeparture_KeyDown);
+            this.txtDeparture.Leave += new System.EventHandler(this.txtDeparture_Leave);
             // 
             // lblDeparture
             // 
