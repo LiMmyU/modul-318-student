@@ -25,25 +25,9 @@ namespace TransportNow
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            //DataTAble erstellen
-            DataTable dtConnections = new DataTable();
-            dtConnections.Columns.Add("Abfahrtszeit");
-            dtConnections.Columns.Add("AbfahrtsOrt");
-            dtConnections.Columns.Add("Zielort");
-            dtConnections.Columns.Add("Zielzeit");
-
-            //Verbindungen auslesen
-            Connections stb = t.GetConnections(txtDeparture.Text, txtDestination.Text);
-
-            //Verbindungen in DataTAble speichern
-            foreach (Connection station in stb.ConnectionList)
-            {
-                dtConnections.Rows.Add(ConvertDateToTime(station.From.Departure), station.From.Station.Name, station.To.Station.Name,
-                   ConvertDateToTime(station.To.Arrival));
-            }
-
-            //DatatAble in DataGrdid hinzufühen
-            dgviewAbfahrtsplan.DataSource = dtConnections;
+            createDeparturePlan();
+            createStationBoard(txtDeparture);
+            lboxDestination.Visible = false;
         }
 
         private void mainForm_Load(object sender, EventArgs e)
@@ -60,21 +44,44 @@ namespace TransportNow
         {
             fillListbox(lboxDestination, txtDestination);
         }
+
         private void txtDeparture_KeyDown(object sender, KeyEventArgs e)
         {
             focusListBox(lboxDeparture,e);
         }
+
         private void lboxDeparture_KeyDown(object sender, KeyEventArgs e)
         {
             selectLocation(lboxDeparture, txtDeparture, e);
         }
+
         private void txtDestination_KeyDown(object sender, KeyEventArgs e)
         {
             focusListBox(lboxDestination, e);
         }
+
         private void lboxDestination_KeyDown(object sender, KeyEventArgs e)
         {
             selectLocation(lboxDestination, txtDestination, e);
+        }
+
+        private void lboxDeparture_DoubleClick(object sender, EventArgs e)
+        {
+            mouseDoubleClick(lboxDeparture, txtDeparture, e);
+        }
+
+        private void lboxDeparture_Leave(object sender, EventArgs e)
+        {
+            hideListBox(lboxDeparture);
+        }
+
+        private void lboxDestination_Leave(object sender, EventArgs e)
+        {
+            hideListBox(lboxDestination);
+        }
+        private void txtDestination_Enter(object sender, EventArgs e)
+        {
+            lboxDeparture.Visible = false;
         }
 
         /// <summary>
@@ -138,6 +145,9 @@ namespace TransportNow
             return time;
         }
 
+        /// <summary>
+        /// Doppelklick auf listBox zum Auswählen
+        /// </summary>
         private void mouseDoubleClick(ListBox lbox, TextBox txt, EventArgs e)
         {
             txt.Text = lbox.SelectedItem.ToString();
@@ -145,9 +155,68 @@ namespace TransportNow
             lbox.Visible = false;
         }
 
-        private void lboxDeparture_DoubleClick(object sender, EventArgs e)
+        /// <summary>
+        /// Den Abfahrtsplan erstellen
+        /// </summary>
+        private void createDeparturePlan()
         {
-            mouseDoubleClick(lboxDeparture, txtDeparture, e);
+            //DataTable erstellen
+            DataTable dtConnections = new DataTable();
+            dtConnections.Columns.Add("Abfahrtszeit");
+            dtConnections.Columns.Add("AbfahrtsOrt");
+            dtConnections.Columns.Add("Zielort");
+            dtConnections.Columns.Add("Zielzeit");
+
+            //Verbindungen auslesen
+            Connections stb = t.GetConnections(txtDeparture.Text, txtDestination.Text);
+
+            //Verbindungen in DataTAble speichern
+            foreach (Connection station in stb.ConnectionList)
+            {
+                dtConnections.Rows.Add(ConvertDateToTime(station.From.Departure), station.From.Station.Name, station.To.Station.Name,
+                    ConvertDateToTime(station.To.Arrival));
+            }
+
+            //DatatAble in DataGrdid hinzufühen
+            dgviewAbfahrtsplan.DataSource = dtConnections;
+        }
+
+        /// <summary>
+        /// Erstellt die Abfahrtstafel
+        /// </summary>
+        private void createStationBoard(TextBox txt)
+        {
+            string stationNameDeparture;
+            string stationId;
+            Stations stDeparture = t.GetStations(txt.Text);
+
+            //DataTable erstellen
+            DataTable dtDepartureBoard = new DataTable();
+            dtDepartureBoard.Columns.Add("Abfahrtzeit");
+            dtDepartureBoard.Columns.Add("Abfahrtsort");
+            dtDepartureBoard.Columns.Add("Zielort");
+
+            //StationBoard holen
+
+            stationNameDeparture = stDeparture.StationList[0].Name;
+            stationId = stDeparture.StationList[0].Id;
+            StationBoardRoot stbRoot = t.GetStationBoard(txt.Text, stationId);
+
+            foreach (StationBoard s in stbRoot.Entries)
+            {
+                //StationBoard in Datatable speichern
+                dtDepartureBoard.Rows.Add(s.Stop.Departure, s.Name, s.To);
+            }
+
+            dgviewAbfahrtstafel.DataSource = dtDepartureBoard;
+        }
+
+        /// <summary>
+        ///Versteckt die Listbox beim Verlassen der Listbox 
+        /// </summary>
+        private void hideListBox(ListBox lbox)
+        {
+            lbox.Visible = false;
         }
     }
 }
