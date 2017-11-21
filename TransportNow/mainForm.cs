@@ -71,6 +71,11 @@ namespace TransportNow
             mouseDoubleClick(lboxDeparture, txtDeparture, e);
         }
 
+        private void lboxDestination_DoubleClick(object sender, EventArgs e)
+        {
+            mouseDoubleClick(lboxDestination, txtDestination, e);
+        }
+
         private void lboxDeparture_Leave(object sender, EventArgs e)
         {
             hideListBox(lboxDeparture);
@@ -249,5 +254,7 @@ namespace TransportNow
         {
             lbox.Visible = false;
         }
+
+
     }
 }

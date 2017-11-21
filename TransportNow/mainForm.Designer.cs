@@ -133,6 +133,7 @@
             this.lboxDestination.Size = new System.Drawing.Size(243, 52);
             this.lboxDestination.TabIndex = 4;
             this.lboxDestination.Visible = false;
+            this.lboxDestination.DoubleClick += new System.EventHandler(this.lboxDestination_DoubleClick);
             this.lboxDestination.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lboxDestination_KeyDown);
             this.lboxDestination.Leave += new System.EventHandler(this.lboxDestination_Leave);
             // 
